@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sewon Survey System</title>
+
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --panel:#ffffff;
+      --line:#e6e8ef;
+      --text:#111827;
+      --muted:#6b7280;
+      --primary1:#D65DB1;
+      --primary2:#FF9671;
+    }
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Noto Sans KR,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      width:min(520px,100%);
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 12px 30px rgba(15,23,42,.08);
+    }
+    h1{ margin:0 0 6px; font-size:22px; font-weight:800; }
+    p.desc{ margin:0 0 22px; font-size:14px; color:var(--muted); line-height:1.5; }
+    .btns{ display:flex; gap:12px; flex-wrap:wrap; }
+    a.btn{
+      flex:1;
+      min-width:200px;
+      height:48px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-weight:800;
+      border:1px solid var(--line);
+      color:var(--text);
+      background:#fff;
+      transition:.15s ease;
+    }
+    a.btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 6px 14px rgba(15,23,42,.12);
+    }
+    a.btn.admin{
+      border:none;
+      color:#fff;
+      background:linear-gradient(135deg,var(--primary1),var(--primary2));
+    }
+    .foot{ margin-top:16px; font-size:12px; color:var(--muted); text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Sewon Survey System</h1>
+      <p class="desc">이용 목적에 따라 아래에서 시스템을 선택해 주세요.</p>
+
+      <div class="btns">
+        <!-- 관리자용 -->
+        <a id="adminLink" class="btn admin"
+           href="https://gyeongseop97.github.io/Sewon-Survey-System-ADMIN"
+           target="_blank" rel="noopener">
+          관리자용 시스템
+        </a>
+
+        <!-- 사용자용 -->
+        <a class="btn"
+           href="https://gyeongseop97.github.io/Sewon-Survey-System-USER"
+           target="_blank" rel="noopener">
+          사용자용 설문 작성
+        </a>
+      </div>
+
+      <div class="foot">Sewon Survey System © Sewon Group</div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "1234"; // 
+
+    const adminLink = document.getElementById("adminLink");
+    adminLink.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const input = prompt("관리자 비밀번호를 입력하세요.");
+      if (input === null) return;
+
+      if (input === ADMIN_PASSWORD) {
+        window.open(adminLink.href, adminLink.target || "_blank", "noopener");
+      } else {
+        alert("비밀번호가 올바르지 않습니다.");
+      }
+    });
+  </script>
+</body>
+</html>
