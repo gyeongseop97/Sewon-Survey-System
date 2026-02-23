@@ -484,7 +484,7 @@ $('tabLogin').onclick = () => setTab('login');
         const pw2 = $('suPw2').value || '';
 
         if(!name || !email || !userType || !pw1 || !pw2){
-          setMsg('사번을 제외한 모든 항목은 필수입니다.', 'err');
+          setMsg('모든 항목을 작성해 주세요.', 'err');
           return;
         }
         if(userType === 'sewon' && !empNo){
