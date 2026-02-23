@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sewon Survey System</title>
+  <style>
+    :root{
+      --bg1:#1a5a66;
+      --bg2:#cfd8dc;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --line:rgba(15,23,42,.10);
+      --shadow: 0 20px 40px rgba(0,0,0,.12);
+      --brand:#1d4ed8;
+      --danger:#dc2626;
+      --ok:#16a34a;
+      --radius:18px;
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;color:var(--text);}
+
+    /* background (grid gradient like your design) */
+    .bg{
+      min-height:100vh;
+      background:
+        linear-gradient(135deg, rgba(16,101,113,.88), rgba(207,216,220,.90)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.10) 0 1px, transparent 1px 120px),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, transparent 1px 160px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+    }
+
+    .wrap{
+      width:min(1200px, 100%);
+      display:grid;
+      grid-template-columns: 1fr 520px;
+      gap:48px;
+      align-items:center;
+    }
+
+    .hero h1{
+      margin:0;
+      font-size:56px;
+      color:#fff;
+      letter-spacing:-0.02em;
+    }
+    .hero .sub{
+      margin-top:10px;
+      color:rgba(255,255,255,.90);
+      font-size:18px;
+      font-weight:600;
+    }
+    .hero .rule{
+      margin-top:18px;
+      height:2px;
+      width:520px;
+      max-width:70%;
+      background:rgba(255,255,255,.35);
+    }
+    .hero .links{
+      margin-top:18px;
+      display:flex;
+      gap:16px;
+      color:rgba(255,255,255,.85);
+      font-weight:700;
+      font-size:14px;
+    }
+    .hero .links a{color:inherit;text-decoration:none;opacity:.9;}
+    .hero .links a:hover{opacity:1;text-decoration:underline;}
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.55);
+    }
+    .cardHead{
+      padding:24px 28px 14px;
+      text-align:center;
+    }
+    .cardHead .title{
+      font-weight:900;
+      letter-spacing:0.16em;
+      color:var(--brand);
+      font-size:14px;
+    }
+    .cardHead .hr{margin-top:14px;height:1px;background:rgba(15,23,42,.08);}    
+
+    .cardBody{padding:18px 28px 24px;}
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      background:rgba(15,23,42,.04);
+      border:1px solid rgba(15,23,42,.08);
+      padding:6px;
+      border-radius:12px;
+      margin-bottom:14px;
+    }
+    .tab{
+      flex:1;
+      border:0;
+      background:transparent;
+      padding:10px 12px;
+      border-radius:10px;
+      font-weight:800;
+      cursor:pointer;
+      color:rgba(15,23,42,.65);
+    }
+    .tab.active{background:#fff;color:var(--text);box-shadow:0 8px 18px rgba(0,0,0,.08);}    
+
+    .row{display:grid;gap:10px;margin:12px 0;}
+    .label{font-size:13px;font-weight:800;color:rgba(15,23,42,.75);}
+
+    .inp, .sel{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(15,23,42,.16);
+      outline:none;
+      font-size:14px;
+      background:#fff;
+      color:var(--text);
+    }
+    .inp:focus, .sel:focus{border-color:rgba(29,78,216,.55);box-shadow:0 0 0 3px rgba(29,78,216,.18);}    
+
+    .btn{
+      width:100%;
+      border:0;
+      border-radius:999px;
+      padding:12px 14px;
+      font-weight:900;
+      cursor:pointer;
+    }
+    .btn.primary{background:#111;color:#fff;}
+    .btn.primary:hover{filter:brightness(1.05);}    
+    .btn.ghost{background:transparent;border:1px solid rgba(15,23,42,.16);color:rgba(15,23,42,.85);}    
+    .btn.ghost:hover{background:rgba(15,23,42,.04);}    
+    .btn:disabled{opacity:.55;cursor:not-allowed;}
+
+    .muterow{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:12px;}
+    .linkbtn{border:0;background:transparent;color:rgba(15,23,42,.70);font-weight:800;cursor:pointer;padding:0;}
+    .linkbtn:hover{text-decoration:underline;}
+
+    .msg{margin-top:12px;font-size:13px;font-weight:800;}
+    .msg.err{color:var(--danger);} 
+    .msg.ok{color:var(--ok);} 
+
+    .hidden{display:none !important;}
+
+    /* chooser */
+    .chooserBox{margin-top:12px;border-top:1px solid rgba(15,23,42,.08);padding-top:14px;}
+    .chooserTitle{font-weight:900;color:rgba(15,23,42,.70);font-size:13px;margin-bottom:10px;}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+    .miniNote{margin-top:14px;padding:12px 12px;border:1px solid rgba(15,23,42,.10);border-radius:12px;background:rgba(15,23,42,.03);color:rgba(15,23,42,.65);font-weight:700;font-size:12px;}
+
+    @media (max-width: 980px){
+      .wrap{grid-template-columns:1fr;}
+      .hero h1{font-size:44px;}
+      .hero .rule{width:420px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="bg">
+    <div class="wrap">
+      <div class="hero">
+        <h1>Sewon Survey System</h1>
+        <div class="rule"></div>
+        <div class="sub">세원 설문 평가 시스템</div>
+        <div class="links">
+          <a href="#" onclick="return false;">이용약관</a>
+          <a href="#" onclick="return false;">서비스 문의</a>
+        </div>
+      </div>
+
+      <div class="card" id="authCard">
+        <div class="cardHead">
+          <div class="title" id="cardTitle">LOGIN</div>
+          <div class="hr"></div>
+        </div>
+        <div class="cardBody">
+
+          <div class="tabs" id="tabs">
+            <button class="tab active" id="tabLogin" type="button">로그인</button>
+            <button class="tab" id="tabSignup" type="button">회원가입</button>
+            <button class="tab" id="tabRecovery" type="button">비밀번호 찾기</button>
+          </div>
+
+          <!-- LOGIN -->
+          <div id="viewLogin">
+            <div class="row">
+              <div class="label">이메일</div>
+              <input class="inp" id="loginEmail" type="email" autocomplete="email" placeholder="name@example.com" />
+            </div>
+            <div class="row">
+              <div class="label">비밀번호</div>
+              <input class="inp" id="loginPw" type="password" autocomplete="current-password" placeholder="••••••••" />
+            </div>
+            <button class="btn primary" id="btnLogin" type="button">로그인</button>
+            <div class="muterow">
+              <span style="color:rgba(15,23,42,.55);font-weight:800;font-size:12px;">서비스 문의: mgs15158@se-won.co.kr</span>
+            </div>
+          </div>
+
+          <!-- SIGNUP -->
+          <div id="viewSignup" class="hidden">
+            <div class="row">
+              <div class="label">이메일</div>
+              <input class="inp" id="suEmail" type="email" placeholder="name@example.com" />
+            </div>
+            <div class="row">
+              <div class="label">비밀번호</div>
+              <input class="inp" id="suPw" type="password" autocomplete="new-password" placeholder="8자 이상" />
+            </div>
+            <div class="row">
+              <div class="label">비밀번호 확인</div>
+              <input class="inp" id="suPw2" type="password" autocomplete="new-password" placeholder="비밀번호 다시 입력" />
+            </div>
+            <div class="row">
+              <div class="label">이름</div>
+              <input class="inp" id="suName" type="text" placeholder="홍길동" />
+            </div>
+            <div class="row">
+              <div class="label">회원구분</div>
+              <select class="sel" id="suUserType">
+                <option value="" selected disabled>선택하세요</option>
+                <option value="sewon">세원 임직원</option>
+                <option value="partner">협력업체</option>
+                <option value="other">기타</option>
+              </select>
+            </div>
+            <div class="row hidden" id="suEmpRow">
+              <div class="label">사번 (세원 임직원만)</div>
+              <input class="inp" id="suEmpNo" type="text" placeholder="선택입력" />
+            </div>
+            <button class="btn primary" id="btnSignup" type="button">회원가입</button>
+            <div class="miniNote">이메일 인증 후 회원가입이 완료됩니다.</div>
+          </div>
+
+          <!-- RECOVERY -->
+          <div id="viewRecovery" class="hidden">
+            <div class="row">
+              <div class="label">이메일</div>
+              <input class="inp" id="rcEmail" type="email" placeholder="name@example.com" />
+            </div>
+            <button class="btn primary" id="btnRecovery" type="button">재설정 메일 보내기</button>
+            <div class="miniNote">메일이 오지 않으면 스팸함을 확인해 주세요.</div>
+          </div>
+
+          <!-- MESSAGE -->
+          <div id="msg" class="msg hidden"></div>
+
+          <!-- CHOOSER + LOGOUT -->
+          <div id="chooser" class="chooserBox hidden">
+            <div class="chooserTitle" id="who">로그인됨</div>
+            <div class="grid2">
+              <button class="btn ghost" id="btnAdmin" type="button">관리자 프로그램</button>
+              <button class="btn ghost" id="btnUser" type="button">사용자 프로그램</button>
+            </div>
+            <div style="margin-top:10px;">
+              <button class="btn ghost" id="btnLogout" type="button">로그아웃</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase CDN (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // ====== CONFIG ======
+    const SUPABASE_URL = "https://pztlmyfutfmbmlvavwuz.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_fnGFEvCmhZRRIWj0qrEEeA_Vex3mxac";
+
+    // 링크 경로는 프로젝트에 맞게 수정
+    const USER_APP_URL  = "https://gyeongseop97.github.io/Sewon-Survey-System-USER/";
+    const ADMIN_APP_URL = "https://gyeongseop97.github.io/Sewon-Survey-System-ADMIN/";
+
+    // ====== Helpers ======
+    const $ = (id) => document.getElementById(id);
+
+    function setMsg(text, type){
+      const el = $('msg');
+      if(!text){ el.classList.add('hidden'); el.textContent=''; el.classList.remove('err','ok'); return; }
+      el.textContent = text;
+      el.classList.remove('hidden');
+      el.classList.toggle('err', type==='err');
+      el.classList.toggle('ok', type==='ok');
+    }
+
+    function setTab(active){
+      const map = { login: 'tabLogin', signup:'tabSignup', recovery:'tabRecovery' };
+      ['tabLogin','tabSignup','tabRecovery'].forEach(id => $(id).classList.remove('active'));
+      $(map[active]).classList.add('active');
+
+      $('viewLogin').classList.toggle('hidden', active!=='login');
+      $('viewSignup').classList.toggle('hidden', active!=='signup');
+      $('viewRecovery').classList.toggle('hidden', active!=='recovery');
+
+      $('cardTitle').textContent = active.toUpperCase();
+      setMsg('', '');
+    }
+
+    function setAuthUI(session){
+      const loggedIn = !!(session && session.user);
+
+      // 로그인 상태면: 탭/폼 숨기고 chooser 노출
+      $('tabs').classList.toggle('hidden', loggedIn);
+      $('viewLogin').classList.toggle('hidden', loggedIn);
+      $('viewSignup').classList.toggle('hidden', true);
+      $('viewRecovery').classList.toggle('hidden', true);
+
+      $('chooser').classList.toggle('hidden', !loggedIn);
+
+      if(!loggedIn){
+        setTab('login');
+        $('btnAdmin').disabled = true;
+        $('btnAdmin').title = '';
+        $('who').textContent = '로그인됨';
+        return;
+      }
+
+      const email = session.user.email || '';
+      $('who').textContent = `로그인됨: ${email}`;
+    }
+
+    async function getRole(sb, userId){
+      // profiles 테이블: user_id uuid PK, role text
+      // (이전 대화에서 사용하던 구조 기준)
+      try{
+        const { data, error } = await sb.from('profiles').select('role').eq('user_id', userId).maybeSingle();
+        if(error) return { role:null, error };
+        return { role: (data && data.role) ? data.role : null, error:null };
+      }catch(e){
+        return { role:null, error:e };
+      }
+    }
+
+    async function applyAdminGate(sb, session){
+      // 관리자 버튼: admin만 활성
+      if(!session || !session.user){
+        $('btnAdmin').disabled = true;
+        return;
+      }
+      const { role } = await getRole(sb, session.user.id);
+      const isAdmin = (role === 'admin');
+      $('btnAdmin').disabled = !isAdmin;
+      $('btnAdmin').title = isAdmin ? '' : '관리자 권한이 없습니다.';
+    }
+
+    // ====== Main ======
+    window.addEventListener('DOMContentLoaded', async () => {
+      if(!window.supabase){
+        setMsg('Supabase 라이브러리를 불러오지 못했습니다. (CDN 차단/오프라인 여부 확인)', 'err');
+        return;
+      }
+
+      const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    storage: window.localStorage,
+    storageKey: "sb-pztlmyfutfmbmlvavwuz-auth-token",
+  },
+});
+
+      // UI bindings
+      $('tabLogin').onclick = () => setTab('login');
+      $('tabSignup').onclick = () => setTab('signup');
+      $('tabRecovery').onclick = () => setTab('recovery');
+
+      $('suUserType').addEventListener('change', () => {
+        const v = $('suUserType').value;
+        $('suEmpRow').classList.toggle('hidden', v !== 'sewon');
+        if(v !== 'sewon') $('suEmpNo').value = '';
+      });
+
+      $('btnUser').onclick = () => { window.location.href = USER_APP_URL; };
+      $('btnAdmin').onclick = () => { window.location.href = ADMIN_APP_URL; };
+
+      $('btnLogout').onclick = async () => {
+        setMsg('', '');
+        const { error } = await sb.auth.signOut();
+        if(error) setMsg(error.message || String(error), 'err');
+      };
+
+      $('btnLogin').onclick = async () => {
+        setMsg('', '');
+        const email = ($('loginEmail').value || '').trim();
+        const password = $('loginPw').value || '';
+        if(!email || !password){ setMsg('이메일/비밀번호를 입력하세요.', 'err'); return; }
+
+        $('btnLogin').disabled = true;
+        try{
+          const { data, error } = await sb.auth.signInWithPassword({ email, password });
+          if(error){ setMsg(error.message || String(error), 'err'); return; }
+          setMsg('로그인 성공!', 'ok');
+          // chooser는 onAuthStateChange에서 표시됨
+        } finally {
+          $('btnLogin').disabled = false;
+        }
+      };
+
+      $('btnRecovery').onclick = async () => {
+        setMsg('', '');
+        const email = ($('rcEmail').value || '').trim();
+        if(!email){ setMsg('이메일을 입력하세요.', 'err'); return; }
+
+        $('btnRecovery').disabled = true;
+        try{
+          // redirectTo 는 필요 시 프로젝트에 맞게 수정
+          const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
+          if(error){ setMsg(error.message || String(error), 'err'); return; }
+          setMsg('재설정 메일을 보냈습니다. 이메일을 확인하세요.', 'ok');
+        } finally {
+          $('btnRecovery').disabled = false;
+        }
+      };
+
+      $('btnSignup').onclick = async () => {
+        setMsg('', '');
+        const name = ($('suName').value || '').trim();
+        const email = ($('suEmail').value || '').trim();
+        const userType = $('suUserType').value;
+        const empNo = ($('suEmpNo').value || '').trim();
+        const pw1 = $('suPw').value || '';
+        const pw2 = $('suPw2').value || '';
+
+        if(!name || !email || !userType || !pw1 || !pw2){
+          setMsg('사번을 제외한 모든 항목은 필수입니다.', 'err');
+          return;
+        }
+        if(userType === 'sewon' && !empNo){
+          // 요구사항: sewon일 경우에만 사번 수집(사번은 선택사항이라 했지만, "수집"은 하되 필수는 아님)
+          // 여기서는 선택사항 그대로 두되 안내만.
+        }
+        if(pw1 !== pw2){ setMsg('비밀번호 확인이 일치하지 않습니다.', 'err'); return; }
+        if(pw1.length < 8){ setMsg('비밀번호는 8자 이상 권장합니다.', 'err'); return; }
+
+        $('btnSignup').disabled = true;
+        try{
+          const { data, error } = await sb.auth.signUp({
+            email,
+            password: pw1,
+            options: {
+              data: {
+                name,
+                user_type: userType,
+                employee_no: (userType === 'sewon') ? (empNo || null) : null
+              }
+            }
+          });
+          if(error){ setMsg(error.message || String(error), 'err'); return; }
+
+          // 프로필 테이블에 넣고 싶다면(권한/추가정보): 서버(RLS) 세팅이 필요할 수 있어 여기서는 안내만
+          setMsg('회원가입 요청 완료. 이메일 인증이 필요할 수 있습니다.', 'ok');
+          setTab('login');
+          $('loginEmail').value = email;
+          $('loginPw').value = '';
+        } finally {
+          $('btnSignup').disabled = false;
+        }
+      };
+
+      // Session rendering
+      const { data: s1 } = await sb.auth.getSession();
+      setAuthUI(s1.session);
+      await applyAdminGate(sb, s1.session);
+
+      sb.auth.onAuthStateChange(async (_event, session) => {
+        setAuthUI(session);
+        await applyAdminGate(sb, session);
+      });
+
+      // default
+      setTab('login');
+    });
+  </script>
+</body>
+</html>
