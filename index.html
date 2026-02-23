@@ -242,6 +242,10 @@
                 <option value="other">기타</option>
               </select>
             </div>
+                        <div class="row">
+              <div class="label">회사명</div>
+              <input class="inp" id="suCompanyname" type="text" placeholder="세원정공" />
+            </div>
             <div class="row hidden" id="suEmpRow">
               <div class="label">사번 (세원 임직원만)</div>
               <input class="inp" id="suEmpNo" type="text" placeholder="선택입력" />
@@ -479,11 +483,12 @@ $('tabLogin').onclick = () => setTab('login');
         const name = ($('suName').value || '').trim();
         const email = ($('suEmail').value || '').trim();
         const userType = $('suUserType').value;
+        const companyname = ($('suCompanyname').value || '').trim();
         const empNo = ($('suEmpNo').value || '').trim();
         const pw1 = $('suPw').value || '';
         const pw2 = $('suPw2').value || '';
 
-        if(!name || !email || !userType || !pw1 || !pw2){
+        if(!name || !email || !userType || !companyname || !pw1 || !pw2){
           setMsg('모든 항목을 작성해 주세요.', 'err');
           return;
         }
@@ -502,6 +507,7 @@ $('tabLogin').onclick = () => setTab('login');
             options: {
               data: {
                 name,
+                company_name: companyname,
                 user_type: userType,
                 employee_no: (userType === 'sewon') ? (empNo || null) : null
               }
