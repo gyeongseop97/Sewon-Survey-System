@@ -1,11 +1,8 @@
-<!doctype html>
 <html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sewon Survey System</title>
-
-  <!-- 브라우저 탭(파비콘) -->
   <link rel="icon" href="adminicon.ico" type="image/x-icon">
 
   <style>
@@ -24,190 +21,83 @@
     }
     *{box-sizing:border-box;}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;color:var(--text);}
-
-    /* background (grid gradient like your design) */
     .bg{
       min-height:100vh;
       background:
         linear-gradient(135deg, rgba(16,101,113,.88), rgba(207,216,220,.90)),
         repeating-linear-gradient(0deg, rgba(255,255,255,.10) 0 1px, transparent 1px 120px),
         repeating-linear-gradient(90deg, rgba(255,255,255,.10) 0 1px, transparent 1px 160px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:40px;
+      display:flex; align-items:center; justify-content:center; padding:40px;
     }
-
     .wrap{
       width:min(1200px, 100%);
-      display:grid;
-      grid-template-columns: 1fr 520px;
-      gap:48px;
-      align-items:center;
+      display:grid; grid-template-columns: 1fr 520px; gap:48px; align-items:center;
     }
-
-    /* ===== Hero Logo (✅ style 안으로 이동) ===== */
-    .heroTitle{
-      display:flex;
-      align-items:center;
-      gap:22px;
-    }
+    .heroTitle{display:flex; align-items:center; gap:22px;}
     .heroLogo{
-      width:80px;
-      height:80px;
-      border:1px solid rgba(255,255,255,.35);
-      border-radius:22px;
-      background:#ffffff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
+      width:80px; height:80px; border:1px solid rgba(255,255,255,.35); border-radius:22px;
+      background:#ffffff; display:flex; align-items:center; justify-content:center; overflow:hidden;
     }
-    .heroLogo img{
-      width:70px;
-      height:70px;
-      object-fit:contain;
-      display:block;
-    }
-
-    .hero h1{
-      margin:0;
-      font-size:50px;
-      color:#fff;
-      letter-spacing:-0.02em;
-      white-space: nowrap;
-      line-height:1.1;
-    }
-    .hero .sub{
-      margin-top:10px;
-      color:rgba(255,255,255,.90);
-      font-size:18px;
-      font-weight:600;
-    }
-    .hero .rule{
-      margin-top:18px;
-      height:2px;
-      width:520px;
-      max-width:70%;
-      background:rgba(255,255,255,.35);
-    }
-    .hero .links{
-      margin-top:18px;
-      display:flex;
-      gap:16px;
-      color:rgba(255,255,255,.85);
-      font-weight:700;
-      font-size:14px;
-    }
-    .hero .links a{color:inherit;text-decoration:none;opacity:.9;}
-    .hero .links a:hover{opacity:1;text-decoration:underline;}
+    .heroLogo img{width:70px; height:70px; object-fit:contain; display:block;}
+    .hero h1{margin:0; font-size:50px; color:#fff; letter-spacing:-0.02em; white-space: nowrap; line-height:1.1;}
+    .hero .sub{margin-top:10px; color:rgba(255,255,255,.90); font-size:18px; font-weight:600;}
+    .hero .rule{margin-top:18px; height:2px; width:520px; max-width:70%; background:rgba(255,255,255,.35);}
 
     .card{
-      background:var(--card);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.55);
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
+      overflow:hidden; border:1px solid rgba(255,255,255,.55);
     }
-    .cardHead{
-      padding:24px 28px 14px;
-      text-align:center;
-    }
-    .cardHead .title{
-      font-weight:900;
-      letter-spacing:0.16em;
-      color:var(--brand);
-      font-size:14px;
-    }
-    .cardHead .hr{margin-top:14px;height:1px;background:rgba(15,23,42,.08);}    
-
+    .cardHead{padding:24px 28px 14px; text-align:center;}
+    .cardHead .title{font-weight:900; letter-spacing:0.16em; color:var(--brand); font-size:14px;}
+    .cardHead .hr{margin-top:14px; height:1px; background:rgba(15,23,42,.08);}
     .cardBody{padding:18px 28px 24px;}
 
     .tabs{
-      display:flex;
-      gap:8px;
-      background:rgba(15,23,42,.04);
-      border:1px solid rgba(15,23,42,.08);
-      padding:6px;
-      border-radius:12px;
-      margin-bottom:14px;
+      display:flex; gap:8px; background:rgba(15,23,42,.04);
+      border:1px solid rgba(15,23,42,.08); padding:6px; border-radius:12px; margin-bottom:14px;
     }
     .tab{
-      flex:1;
-      border:0;
-      background:transparent;
-      padding:10px 12px;
-      border-radius:10px;
-      font-weight:800;
-      cursor:pointer;
-      color:rgba(15,23,42,.65);
+      flex:1; border:0; background:transparent; padding:10px 12px; border-radius:10px;
+      font-weight:800; cursor:pointer; color:rgba(15,23,42,.65);
     }
-    .tab.active{background:#fff;color:var(--text);box-shadow:0 8px 18px rgba(0,0,0,.08);}    
-
-    .row{display:grid;gap:10px;margin:12px 0;}
-    .label{font-size:13px;font-weight:800;color:rgba(15,23,42,.75);}
-
+    .tab.active{background:#fff; color:var(--text); box-shadow:0 8px 18px rgba(0,0,0,.08);}
+    .row{display:grid; gap:10px; margin:12px 0;}
+    .label{font-size:13px; font-weight:800; color:rgba(15,23,42,.75);}
     .inp, .sel{
-      width:100%;
-      padding:12px 14px;
-      border-radius:12px;
-      border:1px solid rgba(15,23,42,.16);
-      outline:none;
-      font-size:14px;
-      background:#fff;
-      color:var(--text);
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(15,23,42,.16);
+      outline:none; font-size:14px; background:#fff; color:var(--text);
     }
-    .inp:focus, .sel:focus{border-color:rgba(29,78,216,.55);box-shadow:0 0 0 3px rgba(29,78,216,.18);}    
-
+    .inp:focus, .sel:focus{border-color:rgba(29,78,216,.55); box-shadow:0 0 0 3px rgba(29,78,216,.18);}
     .btn{
-      width:100%;
-      border:0;
-      border-radius:999px;
-      padding:12px 14px;
-      font-weight:900;
-      cursor:pointer;
+      width:100%; border:0; border-radius:999px; padding:12px 14px; font-weight:900; cursor:pointer;
     }
-    .btn.primary{background:#111;color:#fff;}
-    .btn.primary:hover{filter:brightness(1.05);}    
-    .btn.ghost{background:transparent;border:1px solid rgba(15,23,42,.16);color:rgba(15,23,42,.85);}    
-    .btn.ghost:hover{background:rgba(15,23,42,.04);}    
-    .btn:disabled{opacity:.55;cursor:not-allowed;}
+    .btn.primary{background:#111; color:#fff;}
+    .btn.primary:hover{filter:brightness(1.05);}
+    .btn.ghost{background:transparent; border:1px solid rgba(15,23,42,.16); color:rgba(15,23,42,.85);}
+    .btn.ghost:hover{background:rgba(15,23,42,.04);}
+    .btn:disabled{opacity:.55; cursor:not-allowed;}
 
-    .muterow{display:flex;justify-content:space-between;align-items:center;margin-top:10px;gap:12px;}
-    .linkbtn{border:0;background:transparent;color:rgba(15,23,42,.70);font-weight:800;cursor:pointer;padding:0;}
-    .linkbtn:hover{text-decoration:underline;}
-
-    .msg{margin-top:12px;font-size:13px;font-weight:800;}
-    .msg.err{color:var(--danger);} 
-    .msg.ok{color:var(--ok);} 
-
+    .muterow{display:flex; justify-content:space-between; align-items:center; margin-top:10px; gap:12px;}
+    .msg{margin-top:12px; font-size:13px; font-weight:800;}
+    .msg.err{color:var(--danger);}
+    .msg.ok{color:var(--ok);}
     .hidden{display:none !important;}
-
-    /* chooser */
-    .chooserBox{margin-top:12px;border-top:1px solid rgba(15,23,42,.08);padding-top:14px;}
-    .chooserTitle{font-weight:900;color:rgba(15,23,42,.70);font-size:13px;margin-bottom:10px;}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-
-    .miniNote{margin-top:14px;padding:12px 12px;border:1px solid rgba(15,23,42,.10);border-radius:12px;background:rgba(15,23,42,.03);color:rgba(15,23,42,.65);font-weight:700;font-size:12px;}
+    .chooserBox{margin-top:12px; border-top:1px solid rgba(15,23,42,.08); padding-top:14px;}
+    .chooserTitle{font-weight:900; color:rgba(15,23,42,.70); font-size:13px; margin-bottom:10px;}
+    .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px;}
+    .miniNote{
+      margin-top:14px; padding:12px 12px; border:1px solid rgba(15,23,42,.10);
+      border-radius:12px; background:rgba(15,23,42,.03); color:rgba(15,23,42,.65);
+      font-weight:700; font-size:12px; line-height:1.45;
+    }
+    .btnWithIcon{display:flex; align-items:center; justify-content:center; gap:10px;}
+    .btnWithIcon img{width:30px; height:30px; object-fit:contain;}
 
     @media (max-width: 980px){
       .wrap{grid-template-columns:1fr;}
       .hero h1{font-size:44px;}
       .hero .rule{width:420px;}
     }
-/* 버튼 아이콘 정렬 */
-.btnWithIcon{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-}
-
-.btnWithIcon img{
-  width:30px;
-  height:30px;
-  object-fit:contain;
-}
   </style>
 </head>
 <body>
@@ -215,14 +105,11 @@
     <div class="wrap">
       <div class="hero">
         <div class="heroTitle">
-          <div class="heroLogo">
-            <img src="adminicon.ico" alt="Sewon Logo">
-          </div>
+          <div class="heroLogo"><img src="adminicon.ico" alt="Sewon Logo"></div>
           <h1>Sewon Survey System</h1>
         </div>
         <div class="rule"></div>
         <div class="sub">세원 설문 평가 시스템</div>
-        <div class="links"></div>
       </div>
 
       <div class="card" id="authCard">
@@ -238,7 +125,6 @@
             <button class="tab" id="tabRecovery" type="button">비밀번호 찾기</button>
           </div>
 
-          <!-- LOGIN -->
           <div id="viewLogin">
             <div class="row">
               <div class="label">이메일</div>
@@ -248,7 +134,6 @@
               <div class="label">비밀번호</div>
               <input class="inp" id="loginPw" type="password" autocomplete="current-password" placeholder="••••••••" />
             </div>
-
             <div class="muterow" style="margin-top:6px;">
               <label style="display:flex;align-items:center;gap:8px;font-weight:800;color:rgba(15,23,42,.75);font-size:12px;cursor:pointer;user-select:none;">
                 <input id="rememberEmail" type="checkbox" style="width:16px;height:16px;cursor:pointer;" />
@@ -262,7 +147,6 @@
             </div>
           </div>
 
-          <!-- SIGNUP -->
           <div id="viewSignup" class="hidden">
             <div class="row">
               <div class="label">이메일</div>
@@ -301,31 +185,41 @@
             <div class="miniNote">이메일 인증 후 회원가입이 완료됩니다.</div>
           </div>
 
-          <!-- RECOVERY -->
           <div id="viewRecovery" class="hidden">
             <div class="row">
               <div class="label">이메일</div>
               <input class="inp" id="rcEmail" type="email" placeholder="name@example.com" />
             </div>
             <button class="btn primary" id="btnRecovery" type="button">재설정 메일 보내기</button>
-            <div class="miniNote">메일이 오지 않으면 스팸함을 확인해 주세요.</div>
+            <div class="miniNote" id="recoveryNote">메일이 오지 않으면 스팸함을 확인해 주세요.</div>
           </div>
 
-          <!-- MESSAGE -->
+          <div id="viewReset" class="hidden">
+            <div class="row">
+              <div class="label">새 비밀번호</div>
+              <input class="inp" id="resetPw1" type="password" autocomplete="new-password" placeholder="새 비밀번호를 입력하세요" />
+            </div>
+            <div class="row">
+              <div class="label">새 비밀번호 확인</div>
+              <input class="inp" id="resetPw2" type="password" autocomplete="new-password" placeholder="비밀번호를 다시 입력하세요" />
+            </div>
+            <button class="btn primary" id="btnResetPassword" type="button">비밀번호 변경하기</button>
+            <div class="miniNote">Reset Password 링크로 접속했을 때만 이 화면이 표시됩니다.</div>
+          </div>
+
           <div id="msg" class="msg hidden"></div>
 
-          <!-- CHOOSER + LOGOUT -->
           <div id="chooser" class="chooserBox hidden">
             <div class="chooserTitle" id="who">로그인됨</div>
             <div class="grid2">
-<button class="btn ghost btnWithIcon" id="btnAdmin" type="button">
-  <img src="adminicon.ico" alt="admin">
-  <span>관리자 프로그램</span>
-</button>
-<button class="btn ghost btnWithIcon" id="btnUser" type="button">
-  <img src="usericon.ico" alt="user">
-  <span>사용자 프로그램</span>
-</button>
+              <button class="btn ghost btnWithIcon" id="btnAdmin" type="button">
+                <img src="adminicon.ico" alt="admin">
+                <span>관리자 프로그램</span>
+              </button>
+              <button class="btn ghost btnWithIcon" id="btnUser" type="button">
+                <img src="usericon.ico" alt="user">
+                <span>사용자 프로그램</span>
+              </button>
             </div>
             <div style="margin-top:10px;">
               <button class="btn ghost" id="btnLogout" type="button">로그아웃</button>
@@ -337,22 +231,19 @@
     </div>
   </div>
 
-  <!-- Supabase CDN (UMD) -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // ====== CONFIG ======
     const SUPABASE_URL = "https://pztlmyfutfmbmlvavwuz.supabase.co";
     const SUPABASE_KEY = "sb_publishable_fnGFEvCmhZRRIWj0qrEEeA_Vex3mxac";
 
-    // 링크 경로는 프로젝트에 맞게 수정
     const USER_APP_URL  = "https://gyeongseop97.github.io/Sewon-Survey-System-USER/";
     const ADMIN_APP_URL = "https://gyeongseop97.github.io/Sewon-Survey-System-ADMIN/";
 
-    // ====== Helpers ======
     const $ = (id) => document.getElementById(id);
-
-    // ====== Remember Email ======
     const REMEMBER_EMAIL_KEY = "sewon_saved_email";
+    const RECOVERY_MODE_KEY = "sewon_password_recovery_mode";
+    const RECOVERY_COOLDOWN_UNTIL_KEY = "sewon_recovery_cooldown_until";
+
     function loadRememberedEmail(){
       try{
         const saved = (localStorage.getItem(REMEMBER_EMAIL_KEY) || "").trim();
@@ -363,61 +254,163 @@
         }
       }catch(_){}
     }
+
     function persistRememberedEmail(email){
       const cb = $('rememberEmail');
       const remember = !!(cb && cb.checked);
       try{
-        if(remember && email){
-          localStorage.setItem(REMEMBER_EMAIL_KEY, email);
-        }else{
-          localStorage.removeItem(REMEMBER_EMAIL_KEY);
-        }
+        if(remember && email) localStorage.setItem(REMEMBER_EMAIL_KEY, email);
+        else localStorage.removeItem(REMEMBER_EMAIL_KEY);
       }catch(_){}
+    }
+
+    function setRecoveryMode(flag){
+      try{
+        if(flag) sessionStorage.setItem(RECOVERY_MODE_KEY, 'Y');
+        else sessionStorage.removeItem(RECOVERY_MODE_KEY);
+      }catch(_){}
+    }
+
+    function hasRecoveryLinkInUrl(){
+      const hash = window.location.hash || '';
+      const search = window.location.search || '';
+      return hash.includes('type=recovery') || search.includes('type=recovery');
+    }
+
+    function isRecoveryMode(){
+      try{
+        if(sessionStorage.getItem(RECOVERY_MODE_KEY) === 'Y') return true;
+      }catch(_){}
+      return hasRecoveryLinkInUrl();
     }
 
     function setMsg(text, type){
       const el = $('msg');
-      if(!text){ el.classList.add('hidden'); el.textContent=''; el.classList.remove('err','ok'); return; }
+      if(!text){
+        el.classList.add('hidden');
+        el.textContent = '';
+        el.classList.remove('err','ok');
+        return;
+      }
       el.textContent = text;
       el.classList.remove('hidden');
-      el.classList.toggle('err', type==='err');
-      el.classList.toggle('ok', type==='ok');
+      el.classList.toggle('err', type === 'err');
+      el.classList.toggle('ok', type === 'ok');
+    }
+
+    function hideAllViews(){
+      $('viewLogin').classList.add('hidden');
+      $('viewSignup').classList.add('hidden');
+      $('viewRecovery').classList.add('hidden');
+      $('viewReset').classList.add('hidden');
+    }
+
+    function resetTabActive(){
+      ['tabLogin','tabSignup','tabRecovery'].forEach(id => $(id).classList.remove('active'));
     }
 
     function setTab(active){
-      const map = { login: 'tabLogin', signup:'tabSignup', recovery:'tabRecovery' };
-      ['tabLogin','tabSignup','tabRecovery'].forEach(id => $(id).classList.remove('active'));
-      $(map[active]).classList.add('active');
-
-      $('viewLogin').classList.toggle('hidden', active!=='login');
-      $('viewSignup').classList.toggle('hidden', active!=='signup');
-      $('viewRecovery').classList.toggle('hidden', active!=='recovery');
-
-      $('cardTitle').textContent = active.toUpperCase();
-      setMsg('', '');
-    }
-
-    function setAuthUI(session){
-      const loggedIn = !!(session && session.user);
-
-      // 로그인 상태면: 탭/폼 숨기고 chooser 노출
-      $('tabs').classList.toggle('hidden', loggedIn);
-      $('viewLogin').classList.toggle('hidden', loggedIn);
-      $('viewSignup').classList.toggle('hidden', true);
-      $('viewRecovery').classList.toggle('hidden', true);
-
-      $('chooser').classList.toggle('hidden', !loggedIn);
-
-      if(!loggedIn){
-        setTab('login');
-        $('btnAdmin').disabled = true;
-        $('btnAdmin').title = '';
-        $('who').textContent = '로그인됨';
+      if(isRecoveryMode()){
+        setRecoveryResetMode();
         return;
       }
 
-      const email = session.user.email || '';
-      $('who').textContent = `로그인됨: ${email}`;
+      const map = { login: 'tabLogin', signup:'tabSignup', recovery:'tabRecovery' };
+      resetTabActive();
+      hideAllViews();
+
+      $('tabs').classList.remove('hidden');
+      $('chooser').classList.add('hidden');
+
+      if(map[active]) $(map[active]).classList.add('active');
+      if(active === 'login') $('viewLogin').classList.remove('hidden');
+      if(active === 'signup') $('viewSignup').classList.remove('hidden');
+      if(active === 'recovery') $('viewRecovery').classList.remove('hidden');
+
+      $('cardTitle').textContent = active.toUpperCase();
+      setMsg('', '');
+      renderRecoveryCooldown();
+    }
+
+    function setRecoveryResetMode(){
+      setRecoveryMode(true);
+      resetTabActive();
+      $('tabs').classList.add('hidden');
+      $('chooser').classList.add('hidden');
+      hideAllViews();
+      $('viewReset').classList.remove('hidden');
+      $('cardTitle').textContent = 'RESET PASSWORD';
+      setMsg('새 비밀번호와 비밀번호 확인을 입력한 뒤 변경 버튼을 눌러주세요.', 'ok');
+    }
+
+    function clearRecoveryUrl(){
+      const cleanUrl = window.location.origin + window.location.pathname;
+      history.replaceState({}, document.title, cleanUrl);
+    }
+
+    function getRecoveryCooldownUntil(){
+      try{
+        return Number(localStorage.getItem(RECOVERY_COOLDOWN_UNTIL_KEY) || 0);
+      }catch(_){
+        return 0;
+      }
+    }
+
+    function setRecoveryCooldown(seconds){
+      try{
+        localStorage.setItem(RECOVERY_COOLDOWN_UNTIL_KEY, String(Date.now() + (seconds * 1000)));
+      }catch(_){}
+      renderRecoveryCooldown();
+    }
+
+    function clearRecoveryCooldown(){
+      try{
+        localStorage.removeItem(RECOVERY_COOLDOWN_UNTIL_KEY);
+      }catch(_){}
+      renderRecoveryCooldown();
+    }
+
+    function getCooldownRemainingSeconds(){
+      const until = getRecoveryCooldownUntil();
+      return Math.max(0, Math.ceil((until - Date.now()) / 1000));
+    }
+
+    function renderRecoveryCooldown(){
+      const btn = $('btnRecovery');
+      const note = $('recoveryNote');
+      if(!btn || !note) return;
+
+      const remain = getCooldownRemainingSeconds();
+      if(remain > 0){
+        btn.disabled = true;
+        btn.textContent = `재설정 메일 보내기 (${remain}s)`;
+        note.textContent = `잠시 후 다시 시도해 주세요. 과도한 요청 시 Supabase 이메일 제한에 걸릴 수 있습니다.`;
+      }else{
+        btn.disabled = false;
+        btn.textContent = '재설정 메일 보내기';
+        note.textContent = '메일이 오지 않으면 스팸함을 확인해 주세요.';
+      }
+    }
+
+    setInterval(renderRecoveryCooldown, 1000);
+
+    function normalizeSupabaseErrorMessage(error){
+      const raw = (error?.message || String(error || '')).trim();
+      const lower = raw.toLowerCase();
+
+      if(lower.includes('email rate limit exceeded')){
+        return '요청이 너무 많아 잠시 동안 재설정 메일을 다시 보낼 수 없습니다. 60초 정도 후 다시 시도해 주세요.';
+      }
+      if(lower.includes('for security purposes')){
+        return '보안상 잠시 후 다시 시도해 주세요.';
+      }
+      if(lower.includes('invalid login credentials')){
+        return '이메일 또는 비밀번호가 올바르지 않습니다.';
+      }
+      if(lower.includes('user already registered')){
+        return '이미 가입된 이메일입니다.';
+      }
+      return raw || '요청 처리 중 오류가 발생했습니다.';
     }
 
     async function getRole(sb, userId){
@@ -433,6 +426,7 @@
     async function applyAdminGate(sb, session){
       if(!session || !session.user){
         $('btnAdmin').disabled = true;
+        $('btnAdmin').title = '';
         return;
       }
       const { role } = await getRole(sb, session.user.id);
@@ -441,7 +435,31 @@
       $('btnAdmin').title = isAdmin ? '' : '관리자 권한이 없습니다.';
     }
 
-    // ====== Main ======
+    function setAuthUI(session){
+      const loggedIn = !!(session && session.user);
+
+      if(isRecoveryMode()){
+        setRecoveryResetMode();
+        return;
+      }
+
+      $('tabs').classList.toggle('hidden', loggedIn);
+      $('chooser').classList.toggle('hidden', !loggedIn);
+
+      if(!loggedIn){
+        setTab('login');
+        $('btnAdmin').disabled = true;
+        $('btnAdmin').title = '';
+        $('who').textContent = '로그인됨';
+        return;
+      }
+
+      hideAllViews();
+      $('cardTitle').textContent = 'LOGIN';
+      const email = session.user.email || '';
+      $('who').textContent = `로그인됨: ${email}`;
+    }
+
     window.addEventListener('DOMContentLoaded', async () => {
       if(!window.supabase){
         setMsg('Supabase 라이브러리를 불러오지 못했습니다. (CDN 차단/오프라인 여부 확인)', 'err');
@@ -454,11 +472,10 @@
           autoRefreshToken: true,
           detectSessionInUrl: true,
           storage: window.localStorage,
-          storageKey: "sb-pztlmyfutfmbmlvavwuz-auth-token",
+          storageKey: 'sb-pztlmyfutfmbmlvavwuz-auth-token',
         },
       });
 
-      // Enter key on login inputs => trigger login
       const triggerLoginIfEnter = (e) => {
         if(e.key !== 'Enter') return;
         if(!$('viewLogin') || $('viewLogin').classList.contains('hidden')) return;
@@ -468,8 +485,8 @@
       $('loginEmail')?.addEventListener('keydown', triggerLoginIfEnter);
       $('loginPw')?.addEventListener('keydown', triggerLoginIfEnter);
 
-      // Load saved email (if any)
       loadRememberedEmail();
+      renderRecoveryCooldown();
 
       $('tabLogin').onclick = () => setTab('login');
       $('tabSignup').onclick = () => setTab('signup');
@@ -486,20 +503,27 @@
 
       $('btnLogout').onclick = async () => {
         setMsg('', '');
+        setRecoveryMode(false);
         const { error } = await sb.auth.signOut();
-        if(error) setMsg(error.message || String(error), 'err');
+        if(error) setMsg(normalizeSupabaseErrorMessage(error), 'err');
       };
 
       $('btnLogin').onclick = async () => {
         setMsg('', '');
         const email = ($('loginEmail').value || '').trim();
         const password = $('loginPw').value || '';
-        if(!email || !password){ setMsg('이메일/비밀번호를 입력하세요.', 'err'); return; }
+        if(!email || !password){
+          setMsg('이메일/비밀번호를 입력하세요.', 'err');
+          return;
+        }
 
         $('btnLogin').disabled = true;
         try{
           const { error } = await sb.auth.signInWithPassword({ email, password });
-          if(error){ setMsg(error.message || String(error), 'err'); return; }
+          if(error){
+            setMsg(normalizeSupabaseErrorMessage(error), 'err');
+            return;
+          }
           setMsg('로그인 성공!', 'ok');
           persistRememberedEmail(email);
         } finally {
@@ -510,15 +534,77 @@
       $('btnRecovery').onclick = async () => {
         setMsg('', '');
         const email = ($('rcEmail').value || '').trim();
-        if(!email){ setMsg('이메일을 입력하세요.', 'err'); return; }
+        if(!email){
+          setMsg('이메일을 입력하세요.', 'err');
+          return;
+        }
+
+        const remain = getCooldownRemainingSeconds();
+        if(remain > 0){
+          setMsg(`잠시 후 다시 시도해 주세요. (${remain}초 후 재시도 가능)`, 'err');
+          return;
+        }
 
         $('btnRecovery').disabled = true;
+        $('btnRecovery').textContent = '발송 중...';
+
         try{
-          const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: window.location.href });
-          if(error){ setMsg(error.message || String(error), 'err'); return; }
+const basePath = window.location.pathname.replace(/[^/]+$/, '');
+const { error } = await sb.auth.resetPasswordForEmail(email, {
+  redirectTo: window.location.origin + basePath + 'reset-password.html'
+});
+
+          if(error){
+            const msg = normalizeSupabaseErrorMessage(error);
+            if(msg.includes('60초')){
+              setRecoveryCooldown(60);
+            }
+            setMsg(msg, 'err');
+            return;
+          }
+
+          setRecoveryCooldown(60);
           setMsg('재설정 메일을 보냈습니다. 이메일을 확인하세요.', 'ok');
         } finally {
-          $('btnRecovery').disabled = false;
+          renderRecoveryCooldown();
+        }
+      };
+
+      $('btnResetPassword').onclick = async () => {
+        setMsg('', '');
+        const pw1 = $('resetPw1').value || '';
+        const pw2 = $('resetPw2').value || '';
+
+        if(!pw1 || !pw2){
+          setMsg('새 비밀번호와 확인 비밀번호를 모두 입력하세요.', 'err');
+          return;
+        }
+        if(pw1 !== pw2){
+          setMsg('비밀번호 확인이 일치하지 않습니다.', 'err');
+          return;
+        }
+        if(pw1.length < 8){
+          setMsg('비밀번호는 8자 이상으로 입력해 주세요.', 'err');
+          return;
+        }
+
+        $('btnResetPassword').disabled = true;
+        try{
+          const { error } = await sb.auth.updateUser({ password: pw1 });
+          if(error){
+            setMsg(normalizeSupabaseErrorMessage(error), 'err');
+            return;
+          }
+
+          setMsg('비밀번호가 변경되었습니다. 새 비밀번호로 다시 로그인해 주세요.', 'ok');
+          $('resetPw1').value = '';
+          $('resetPw2').value = '';
+          setRecoveryMode(false);
+          clearRecoveryUrl();
+          await sb.auth.signOut();
+          setTab('login');
+        } finally {
+          $('btnResetPassword').disabled = false;
         }
       };
 
@@ -536,8 +622,14 @@
           setMsg('모든 항목을 작성해 주세요.', 'err');
           return;
         }
-        if(pw1 !== pw2){ setMsg('비밀번호 확인이 일치하지 않습니다.', 'err'); return; }
-        if(pw1.length < 8){ setMsg('비밀번호는 8자 이상 권장합니다.', 'err'); return; }
+        if(pw1 !== pw2){
+          setMsg('비밀번호 확인이 일치하지 않습니다.', 'err');
+          return;
+        }
+        if(pw1.length < 8){
+          setMsg('비밀번호는 8자 이상 권장합니다.', 'err');
+          return;
+        }
 
         $('btnSignup').disabled = true;
         try{
@@ -553,7 +645,10 @@
               }
             }
           });
-          if(error){ setMsg(error.message || String(error), 'err'); return; }
+          if(error){
+            setMsg(normalizeSupabaseErrorMessage(error), 'err');
+            return;
+          }
 
           setMsg('회원가입 요청 완료. 이메일 인증이 필요할 수 있습니다.', 'ok');
           setTab('login');
@@ -564,19 +659,38 @@
         }
       };
 
-      // Session rendering
+      if(hasRecoveryLinkInUrl()){
+        setRecoveryResetMode();
+      }
+
       const { data: s1 } = await sb.auth.getSession();
       setAuthUI(s1.session);
       await applyAdminGate(sb, s1.session);
 
-      sb.auth.onAuthStateChange(async (_event, session) => {
+      sb.auth.onAuthStateChange(async (event, session) => {
+        if(event === 'PASSWORD_RECOVERY'){
+          setRecoveryResetMode();
+          return;
+        }
+
+        if(hasRecoveryLinkInUrl() || isRecoveryMode()){
+          setRecoveryResetMode();
+          return;
+        }
+
+        if(event === 'SIGNED_OUT'){
+          setRecoveryMode(false);
+        }
+
         setAuthUI(session);
         await applyAdminGate(sb, session);
       });
-
-      // default
-      setTab('login');
     });
   </script>
 </body>
 </html>
+'''
+
+path = Path('/mnt/data/index_reset_password_stable.html')
+path.write_text(html, encoding='utf-8')
+print(path.as_posix())
