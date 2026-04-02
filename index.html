@@ -689,8 +689,3 @@ const { error } = await sb.auth.resetPasswordForEmail(email, {
   </script>
 </body>
 </html>
-'''
-
-path = Path('/mnt/data/index_reset_password_stable.html')
-path.write_text(html, encoding='utf-8')
-print(path.as_posix())
