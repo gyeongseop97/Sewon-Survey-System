@@ -399,7 +399,7 @@
       const lower = raw.toLowerCase();
 
       if(lower.includes('email rate limit exceeded')){
-        return '요청이 너무 많아 잠시 동안 재설정 메일을 다시 보낼 수 없습니다. 60초 정도 후 다시 시도해 주세요.';
+        return '요청이 많아 인증 메일 발송이 제한되었습니다. 잠시 후 다시 시도해 주세요.';
       }
       if(lower.includes('for security purposes')){
         return '보안상 잠시 후 다시 시도해 주세요.';
