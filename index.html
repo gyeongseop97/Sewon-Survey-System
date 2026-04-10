@@ -633,27 +633,29 @@ const { error } = await sb.auth.resetPasswordForEmail(email, {
 
         $('btnSignup').disabled = true;
         try{
-          const { error } = await sb.auth.signUp({
-            email,
-            password: pw1,
-            options: {
-              data: {
-                name,
-                company_name: companyname,
-                user_type: userType,
-                employee_no: (userType === 'sewon') ? (empNo || null) : null
-              }
-            }
-          });
+const baseUrl = window.location.origin + window.location.pathname;
+
+const { data, error } = await sb.auth.signUp({
+  email,
+  password: pw1,
+  options: {
+    emailRedirectTo: baseUrl,
+    data: {
+      name,
+      company_name: companyname,
+      user_type: userType,
+      employee_no: (userType === 'sewon') ? (empNo || null) : null
+    }
+  }
+});
           if(error){
             setMsg(normalizeSupabaseErrorMessage(error), 'err');
             return;
           }
 
-          setMsg('회원가입 요청 완료. 이메일 인증이 필요할 수 있습니다.', 'ok');
-          setTab('login');
-          $('loginEmail').value = email;
-          $('loginPw').value = '';
+setMsg(`${email} 주소로 인증 메일을 발송했습니다. 메일함(스팸함 포함)을 확인한 뒤 인증을 완료해 주세요.`, 'ok');
+$('loginEmail').value = email;
+$('loginPw').value = '';
         } finally {
           $('btnSignup').disabled = false;
         }
